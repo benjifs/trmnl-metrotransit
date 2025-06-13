@@ -1,0 +1,12 @@
+---
+watch:
+  - .trmnlp.yml
+  - src
+
+custom_fields:
+  stop_id: 13207
+  # stop_id: 51413 # blue
+  # stop_id: 56117 # a line
+  # ignore_routes: "3,Blue,A Line"
+
+time_zone: America/Chicago

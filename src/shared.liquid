@@ -1,0 +1,46 @@
+{% template nextrip %}
+{% if full_width %}{% assign truncate = 50 %}
+{% else %}{% assign truncate = 30 %}
+{% endif %}
+{% assign exclude_ids = trmnl.plugin_settings.custom_fields_values.ignore_routes | downcase | replace: ", ","," | replace: " ,": "," | split: "," %}
+<div class="layout layout--top">
+  <table class="table">
+    <thead>
+      <tr>
+        <th><span class="label label--bold w--20">Route</span></th>
+        <th><span class="label label--bold">Destination</span></th>
+        <th><span class="label label--bold text--right">Departs</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% assign count = 0 %}
+      {% for item in departures %}
+      {% assign route_id_lower = item.route_short_name | downcase %}
+      {% unless exclude_ids contains route_id_lower %}
+      {% assign count = count | plus: 1 %}
+      <tr>
+        <td><span class="label">{{ item.route_short_name }}</span></td>
+        <td><span class="label">{{ item.description | truncate: truncate }}</span></td>
+        <td><span class="label text--right">{% if item.actual %}<img src="https://www.metrotransit.org/img/svg/broadcast-blue.svg" height="15">{% else %}<img width="10">{% endif %} {{ item.departure_text }}</span></td>
+      </tr>
+      {% endunless %}
+      {% endfor %}
+      {% if count == 0 %}
+      <tr>
+        <td><span class="label">No Routes Found</span></td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+{% endtemplate %}
+
+{% template title_bar %}
+<div class="title_bar">
+  <img class="image image-stroke" src="https://www.metrotransit.org/Data/Sites/1/skins/MetroTransitIII/favicon.ico"/>
+  {% if full_width %}<span class="title">MetroTransit</span>{% endif %}
+  <span class="title">{{ trmnl.plugin_settings.custom_fields_values.stop_id }}</span>
+  <span class="title">{% if stop %}{{ stop.description | truncate: 45 }}{% else %}Invalid Stop ID{% endif %}</span>
+  {% if full_width %}<span class="instance">{{ "now" | date: '%s' | plus: trmnl.user.utc_offset | date: "%l:%M %p" }}</span>{% endif %}
+</div>
+{% endtemplate %}

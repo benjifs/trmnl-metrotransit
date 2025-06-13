@@ -1,0 +1,28 @@
+---
+strategy: polling
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+polling_url: 'https://svc.metrotransit.org/nextrip/{{ stop_id }}'
+polling_headers: ''
+name: Metro Transit
+refresh_interval: 15
+custom_fields:
+- keyname: doesnt_matter
+  name: About This Plugin
+  field_type: author_bio
+  description: Upcoming departures for stops in Minneapolis/St Paul metro
+  github_url: https://github.com/benjifs/trmnl-metrotransit
+  learn_more_url: https://benji.dog/articles/trmnl-metrotransit
+- keyname: stop_id
+  field_type: number
+  name: Stop ID
+  description: You can find your closest Stop IDs using the <a class="underline" href="https://www.metrotransit.org/nextrip" target="_blank">Metro Transit website</a>.
+  placeholder: "13207"
+- keyname: ignore_routes
+  field_type: string
+  name: Ignore Routes
+  description: "(Optional) Comma separated list of routes you don't wish to see"
+  placeholder: "3,Blue,A Line"
+  optional: true
