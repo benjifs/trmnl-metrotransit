@@ -2,7 +2,7 @@
 
 [TRMNL](https://usetrmnl) plugin to get the upcoming public transit departures for stops in the Minneapolis/St Paul metro.
 
-![](screenshot.jpg)
+![](screenshot.png)
 
 ## Setup
 You can install this plugin via recipe: [https://usetrmnl.com/recipes/95919](https://usetrmnl.com/recipes/95919)
